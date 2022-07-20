@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Minesweeper Project</title>
+        <link rel="stylesheet" href="css/main.css" />
+    </head>
+
+    <body onload="initGame()" oncontextmenu="cellMarked()">
+        <h1 title="Good Luck">Minesweeper</h1>
+        <div class="board-container"></div>
+        <table class="minesweeper">
+            <tbody class="mines-board"></tbody>
+        </table>
+        <script type="text/javascript">
+            document.addEventListener('contextmenu', function (Minesweeper) {
+                Minesweeper.preventDefault()
+            })
+        </script>
+        <script src="js/utils.js"></script>
+        <script src="js/main.js">
+            document.addEventListener("contextmenu",function(Minesweeper){
+              Minesweeper.preventDefault()
+            })
+        </script>
+    </body>
+</html>

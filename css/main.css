@@ -1,0 +1,13 @@
+body {
+    background-color: rgb(242, 242, 242);
+}
+table {
+    border-collapse: separate;
+    border-spacing: 10px;
+}
+.cell {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: 1.5em;
+}

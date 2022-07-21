@@ -22,8 +22,7 @@ td:hover {
     background-color: wheat;
 }
 img {
-    margin-top: 50px;
-    width: 50px;
+    width: 20px;
 }
 .mines-board {
     max-height: 100px;
@@ -62,9 +61,9 @@ img {
     margin-top: 75px;
     /* box-shadow: 5px 10px #888888; */
     transition: box-shadow, 1s;
-    /* max-width: 420px;
+    max-width: 420px;
     max-height: 600px;
-    min-width: 300px; */
+    min-width: 300px;
 }
 .cell {
     width: 40px;
@@ -103,4 +102,6 @@ img {
 
 .smile {
     text-align: center;
+    width: 40px;
+    height: 40px;
 }

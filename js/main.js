@@ -11,10 +11,23 @@ const losingGame = document.querySelector('.losing-game')
 const winningGame = document.querySelector('.winning-game')
 const elContainer = document.querySelector('.board-container')
 
-var gFirstLevel = {
+const gFirstLevel = {
     SIZE: 4,
     MINES: 2,
 }
+
+const gMediumLevel = {
+    SIZE: 8,
+    MINES: 12,
+}
+
+const gHardLevel = {
+    SIZE: 12,
+    MINES: 30,
+}
+
+var selectedLevel = gFirstLevel
+
 var gClick = true
 var gClicks
 var gMines = []
@@ -36,14 +49,24 @@ var gBoard = {
 
 var gGame
 
+const onLevelClick = (level) => {
+    selectedLevel = level
+    initGame()
+}
+
 function initGame() {
     console.log('Good Luck!')
     gClicks = 0
     gLives = 3
+    console.log({ gLives })
+    for (var i = 1; i <= gLives; i++) {
+        const liveImg = document.querySelector(`.health${i}`)
+        liveImg.style.display = ''
+    }
     gMines = []
     gPressedMines = 0
-    gFlags = []
     clearInterval(gTime)
+    gFlags = []
     gGame = {
         isOn: false,
         shownCount: 0,
@@ -51,19 +74,15 @@ function initGame() {
         secPassed: 0,
     }
     gFirstClick = {}
+
     losingGame.style.display = 'none'
     winningGame.style.display = 'none'
-    // elContainer.style.backgroundColor = 'white'
     gBoard = buildBoard()
     renderBoard(gBoard, '.board-container')
-
-    // gMinesAroundCount = setMinesNegsCount(gBoard, i, j)
-    // countNegsAround(gBoard)
-    console.log(gBoard)
 }
 
 function buildBoard() {
-    const SIZE = gFirstLevel.SIZE
+    const SIZE = selectedLevel.SIZE
     const board = []
     for (var i = 0; i < SIZE; i++) {
         board[i] = []
@@ -80,20 +99,21 @@ function buildBoard() {
     // console.log(board)
     return board
 }
+
 function renderBoard(board, selector) {
     var strHTML = '<table border="4"><tbody>'
     for (var i = 0; i < board.length; i++) {
         strHTML += '<tr>'
         for (var j = 0; j < board[0].length; j++) {
             var className = `cell cell-${i}-${j}`
-            strHTML += `<td oncontextmenu="cellClicked(this,${i},${j},event)" data-i="${i}" data-j="${j}"  class=${className} onclick="cellClicked(this,${i},${j},event)"></td>`
+            strHTML += `<td oncontextmenu="cellClicked(this,${i},${j},event)" data-i="${i}" data-j="${j}"  class="${className}" onclick="cellClicked(this,${i},${j},event)"></td>`
         }
         strHTML += '</tr>'
     }
     strHTML += '</tbody></table>'
-    var elContainer = document.querySelector(selector)
-    elContainer.innerHTML = strHTML
-    console.log(elContainer)
+    var elBoard = document.querySelector(selector)
+    elBoard.innerHTML = strHTML
+    // console.log(strHTML)
 }
 
 function setTimer() {
@@ -102,7 +122,7 @@ function setTimer() {
 }
 
 function startTimer() {
-    var currTime = Date.now() - gTime
+    var currTime = Date.now() - gStartTime
     var millSec = currTime % 1000
     var sec = parseInt(currTime / 1000)
     gScreenTimer.innerText = `${sec}:${millSec}`
@@ -146,22 +166,22 @@ function cellClicked(elCell, i, j, ev) {
 
     if (ev.which === 3) {
         console.log(ev)
-        if (gBoard[i][j].cellPressed) {
-            console.log(gBoard)
-            return
-        }
+
+        console.log(gBoard[i][j])
 
         // flag off
         if (gBoard[i][j].isFlagged) {
             renderCell(i, j, '<img hidden src="/img/flag.png" />')
             gBoard[i][j].isFlagged = false
+            gBoard[i][j].cellPressed = false
             console.log(gBoard)
             removeFlag(i, j)
         }
 
         // flag on
-        else {
-            renderCell(i, j, '<img hidden src="/img/flag.png" />')
+        else if (!gBoard[i][j].cellPressed) {
+            renderCell(i, j, '<img src="/img/flag.png" />')
+            gBoard[i][j].cellPressed = true
             gBoard[i][j].isFlagged = true
             gFlags.push({ i, j })
             console.log(gFlags)
@@ -178,7 +198,10 @@ function cellClicked(elCell, i, j, ev) {
             gGame.markedCount++
             gameOverCheck()
             gBoard[i][j].cellPressed = true
-        } else if (gBoard[i][j].img === `<img src="/img/mine.png" />`) {
+        } else if (
+            gBoard[i][j].img === `<img src="/img/mine.png" />` &&
+            !gBoard[i][j].cellPressed
+        ) {
             gBoard[i][j].cellPressed = true
             renderCell(i, j, `<img src="/img/mine.png" />`)
             lostGame()
@@ -195,15 +218,16 @@ function cellClicked(elCell, i, j, ev) {
         }
     }
 }
+
 function renderCell(i, j, value) {
     // Select the elCell and set the value
-    // console.log(value)
+    console.log(value)
 
-    var elCell = document.querySelector(`.cell cell-${i}-${j}`)
-    // console.log(elCell)
-
+    var elCell = document.querySelector(`.cell.cell-${i}-${j}`)
     elCell.innerHTML = value
+    // console.log(elCell)
 }
+
 function gameOverCheck() {
     var flagsCount = 0
     for (var i = 0; i < gMines.length; i++) {
@@ -214,15 +238,15 @@ function gameOverCheck() {
         }
     }
     if (
-        flagsCount === gFirstLevel.MINES - gPressedMines &&
-        gGame.markedCount === gFirstLevel.SIZE ** 2 - 2
+        flagsCount === selectedLevel.MINES - gPressedMines &&
+        gGame.markedCount === selectedLevel.SIZE ** 2 - 2
     ) {
         victory()
     }
 }
 
 function lostGame() {
-    if (gLives !== 1) {
+    if (gLives > 1) {
         gPressedMines++
         var lives = document.querySelector(`.health${gLives}`)
         lives.style.display = 'none'
@@ -230,11 +254,10 @@ function lostGame() {
     } else {
         lives = document.querySelector(`.health${gLives}`)
         lives.style.display = 'none'
-        clearInterval(gStartTime)
+        clearInterval(gTime)
         gGame.isOn = false
         losingGame.style.display = 'block'
         document.querySelector('.lost').style.display = 'inline'
-        document.querySelector('.smile').style.display = 'none'
         for (var i = 0; i < gMines.length; i++) {
             renderCell(gMines[i].i, gMines[i].j, `<img src="/img/mine.png" />`)
         }
@@ -242,16 +265,15 @@ function lostGame() {
 }
 
 function victory() {
-    clearInterval(gStartTime)
+    clearInterval(gTime)
     gGame.isOn = false
-    winningTitle.style.display = 'block'
+    winningGame.style.display = 'block'
     document.querySelector('.win').style.display = 'inline'
-    document.querySelector('.smile').style.display = 'none'
 }
 
 function removeFlag(i, j) {
     for (var f = 0; f < gFlags.length; f++) {
-        if (gFlags[f].i === i && gFlags[k].j === j) {
+        if (gFlags[f].i === i && gFlags[f].j === j) {
             gFlags.splice(f, 1)
         }
     }
@@ -274,7 +296,7 @@ function cleanBoard(board) {
 
 function randMines() {
     var emptyCells = cleanBoard(gBoard)
-    for (var i = 0; i < gFirstLevel.MINES; i++) {
+    for (var i = 0; i < selectedLevel.MINES; i++) {
         var randomCell = getRandomInt(0, emptyCells.length)
         var cell = emptyCells[randomCell]
         if (cell.i === gFirstClick.i && cell.j === gFirstClick.j) {
@@ -284,6 +306,7 @@ function randMines() {
         }
         // console.log(cell)
         gBoard[cell.i][cell.j].img = `<img src="/img/mine.png" />`
+        console.log(gBoard[cell.i][cell.j].img)
         // console.log(gBoard[cell.i][cell.j])
         emptyCells.splice(randomCell, 1)
         gMines.push(cell)

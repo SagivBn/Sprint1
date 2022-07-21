@@ -10,10 +10,42 @@
 
     <body onload="initGame()" oncontextmenu="cellMarked()">
         <h1 title="Good Luck">Minesweeper</h1>
+        <table class="score-board">
+            <tbody></tbody>
+        </table>
+        <div class="health-remain">
+            <img class="health1" src="/img/heart.png" alt="heart1" />
+            <img class="health2" src="/img/heart.png" alt="heart2" />
+            <img class="health3" src="/img/heart.png" alt="heart3" />
+        </div>
         <div class="board-container"></div>
         <table class="minesweeper">
             <tbody class="mines-board"></tbody>
         </table>
+        <h1 class="losing-game">You Lost!</h1>
+        <h1 class="winning-game">You Won!</h1>
+        <div class="smile">
+            <img
+                onclick="init()"
+                class="smile"
+                src="/img/smile.png"
+                alt="smile-face"
+            />
+            <img
+                onclick="init()"
+                class="lost"
+                src="/img/lost.png"
+                alt="lost-face"
+            />
+            <img
+                onclick="init()"
+                class="win"
+                src="/img/win.png"
+                alt="win-face"
+            />
+        </div>
+
+        <div class="timer">0</div>
         <script type="text/javascript">
             document.addEventListener('contextmenu', function (Minesweeper) {
                 Minesweeper.preventDefault()

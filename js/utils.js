@@ -3,15 +3,8 @@ function renderBoard(mat, selector) {
     for (var i = 0; i < mat.length; i++) {
         strHTML += '<tr>'
         for (var j = 0; j < mat[0].length; j++) {
-            var cell = mat[i][j]
-            if (cell.isMine) {
-                cell = MINE.isMine
-            } else {
-                cell = cell.minesAroundCount
-            }
-
             var className = `cell cell-${i}-${j}`
-            strHTML += `<td class="${className}"> ${cell} </td>`
+            strHTML += `<td oncontextmenu="cellClicked(this,${i},${j},event)" data-i="${i}" data-j="${j}"  class=${className} onclick="cellClicked(this,${i},${j},event)"></td>`
         }
         strHTML += '</tr>'
     }
@@ -39,8 +32,8 @@ function renderCell(location, value) {
     elCell.innerHTML = value
 }
 /////////////////////////////////////////////////////////////////////////////////
-function getRandomIntInclusive(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min) + min)
 }
 /////////////////////////////////////////////////////////////////////////////////
 function getRandomColor() {
@@ -108,21 +101,21 @@ function toggleGame(elBtn) {
     }
 }
 /////////////////////////////////////////////////////////////////////////////////
-function onCellClicked(elCell, cellI, cellJ) {
-    // console.log('cellI, cellJ', cellI, cellJ)
-    console.log('elCell.dataset:', elCell.dataset)
-    if (gBoard[cellI][cellJ] === LIFE) {
-        // Model
-        gBoard[cellI][cellJ] = SUPER_LIFE
+// function onCellClicked(elCell, cellI, cellJ) {
+//     // console.log('cellI, cellJ', cellI, cellJ)
+//     console.log('elCell.dataset:', elCell.dataset)
+//     if (gBoard[cellI][cellJ] === LIFE) {
+//         // Model
+//         gBoard[cellI][cellJ] = SUPER_LIFE
 
-        // DOM
-        elCell.innerText = SUPER_LIFE
+//         // DOM
+//         elCell.innerText = SUPER_LIFE
 
-        blowUpNegs(cellI, cellJ)
-    }
+//         blowUpNegs(cellI, cellJ)
+//     }
 
-    console.table(gBoard)
-}
+//     console.table(gBoard)
+// }
 /////////////////////////////////////////////////////////////////////////////////
 // function setMinesNegsCount(mat, cellI, cellJ) {
 //     gMinesAroundCount = 0

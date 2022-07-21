@@ -171,7 +171,7 @@ function cellClicked(elCell, i, j, ev) {
 
         // flag off
         if (gBoard[i][j].isFlagged) {
-            renderCell(i, j, '<img hidden src="/img/flag.png" />')
+            renderCell(i, j, '<img hidden src="img/flag.png" />')
             gBoard[i][j].isFlagged = false
             gBoard[i][j].cellPressed = false
             console.log(gBoard)
@@ -180,7 +180,7 @@ function cellClicked(elCell, i, j, ev) {
 
         // flag on
         else if (!gBoard[i][j].cellPressed) {
-            renderCell(i, j, '<img src="/img/flag.png" />')
+            renderCell(i, j, '<img src="img/flag.png" />')
             gBoard[i][j].cellPressed = true
             gBoard[i][j].isFlagged = true
             gFlags.push({ i, j })
@@ -199,11 +199,11 @@ function cellClicked(elCell, i, j, ev) {
             gameOverCheck()
             gBoard[i][j].cellPressed = true
         } else if (
-            gBoard[i][j].img === `<img src="/img/mine.png" />` &&
+            gBoard[i][j].img === `<img src="img/mine.png" />` &&
             !gBoard[i][j].cellPressed
         ) {
             gBoard[i][j].cellPressed = true
-            renderCell(i, j, `<img src="/img/mine.png" />`)
+            renderCell(i, j, `<img src="img/mine.png" />`)
             lostGame()
             gBoard[i][j].cellPressed = true
             gameOverCheck()
@@ -302,7 +302,7 @@ function randMines() {
             cell = emptyCells[randomCell]
         }
         // console.log(cell)
-        gBoard[cell.i][cell.j].img = `<img src="/img/mine.png" />`
+        gBoard[cell.i][cell.j].img = `<img src="img/mine.png" />`
         console.log(gBoard[cell.i][cell.j].img)
         // console.log(gBoard[cell.i][cell.j])
         emptyCells.splice(randomCell, 1)
@@ -341,7 +341,7 @@ function findNeighbors() {
         var mineCount = 0
         // console.log(neighbors)
         for (var j = 0; j < neighbors.length; j++) {
-            if (neighbors[j].img === `<img src="/img/mine.png" />`) {
+            if (neighbors[j].img === `<img src="img/mine.png" />`) {
                 mineCount++
                 // console.log(mineCount)
             }

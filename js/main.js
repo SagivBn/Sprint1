@@ -231,16 +231,13 @@ function renderCell(i, j, value) {
 function gameOverCheck() {
     var flagsCount = 0
     for (var i = 0; i < gMines.length; i++) {
-        for (var j = 0; j > gFlags.length; j++) {
-            if (gMines[i].i === gFlags[j].i && gMines[i].k === gFlags[j].k) {
+        for (var j = 0; j < gFlags.length; j++) {
+            if (gMines[i].i === gFlags[j].i && gMines[i].j === gFlags[j].j) {
                 flagsCount++
             }
         }
     }
-    if (
-        flagsCount === selectedLevel.MINES - gPressedMines &&
-        gGame.markedCount === selectedLevel.SIZE ** 2 - 2
-    ) {
+    if (flagsCount === selectedLevel.MINES - gPressedMines) {
         victory()
     }
 }

@@ -5,11 +5,35 @@ body {
 
 table {
     border-collapse: separate;
-    border-spacing: 10px;
+    border-spacing: 5px;
+}
+
+td {
+    background-color: gray;
+    width: 150px;
+    height: 50px;
+    text-align: center;
+    max-width: 50px;
+    min-width: 50px;
+    max-height: 50px;
+    min-height: 40px;
+}
+td:hover {
+    background-color: wheat;
 }
 img {
     margin-top: 50px;
     width: 50px;
+}
+.mines-board {
+    max-height: 100px;
+    max-width: 426.188;
+}
+.pressed {
+    background-color: rgb(198, 182, 182);
+}
+.hidden {
+    display: none;
 }
 .losing-game {
     text-align: center;

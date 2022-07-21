@@ -1,17 +1,17 @@
-function renderBoard(mat, selector) {
-    var strHTML = '<table border="4"><tbody>'
-    for (var i = 0; i < mat.length; i++) {
-        strHTML += '<tr>'
-        for (var j = 0; j < mat[0].length; j++) {
-            var className = `cell cell-${i}-${j}`
-            strHTML += `<td oncontextmenu="cellClicked(this,${i},${j},event)" data-i="${i}" data-j="${j}"  class=${className} onclick="cellClicked(this,${i},${j},event)"></td>`
-        }
-        strHTML += '</tr>'
-    }
-    strHTML += '</tbody></table>'
-    const elContainer = document.querySelector(selector)
-    elContainer.innerHTML = strHTML
-}
+// function renderBoard(mat, selector) {
+//     var strHTML = '<table border="4"><tbody>'
+//     for (var i = 0; i < mat.length; i++) {
+//         strHTML += '<tr>'
+//         for (var j = 0; j < mat[0].length; j++) {
+//             var className = `cell cell-${i}-${j}`
+//             strHTML += `<td oncontextmenu="cellClicked(this,${i},${j},event)" data-i="${i}" data-j="${j}"  class=${className} onclick="cellClicked(this,${i},${j},event)"></td>`
+//         }
+//         strHTML += '</tr>'
+//     }
+//     strHTML += '</tbody></table>'
+//     const elContainer = document.querySelector(selector)
+//     elContainer.innerHTML = strHTML
+// }
 /////////////////////////////////////////////////////////////////////////////////
 function copyMat(mat) {
     var newMat = []
@@ -25,12 +25,12 @@ function copyMat(mat) {
 }
 /////////////////////////////////////////////////////////////////////////////////
 // location such as: {i: 2, j: 7}
-function renderCell(location, value) {
-    // Select the elCell and set the value
-    // console.log(value)
-    const elCell = document.querySelector(`.cell-${location.i}-${location.j}`)
-    elCell.innerHTML = value
-}
+// function renderCell(location, value) {
+//     // Select the elCell and set the value
+//     // console.log(value)
+//     const elCell = document.querySelector(`.cell-${location.i}-${location.j}`)
+//     elCell.innerHTML = value
+// }
 /////////////////////////////////////////////////////////////////////////////////
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min) + min)
@@ -195,29 +195,29 @@ function findEmptyPos() {
     return null
 }
 /////////////////////////////////////////////////////////////////////////////////
-function countNegsAround(mat, rowIdx, colIdx) {
-    var foodCount = 0
-    for (var i = rowIdx - 1; i <= rowIdx + 1; i++) {
-        if (i < 0 || i > mat.length - 1) continue
+// function countNegsAround(mat, rowIdx, colIdx) {
+//     var foodCount = 0
+//     for (var i = rowIdx - 1; i <= rowIdx + 1; i++) {
+//         if (i < 0 || i > mat.length - 1) continue
 
-        for (var j = colIdx - 1; j <= colIdx + 1; j++) {
-            if (j < 0 || j > mat[0].length - 1) continue
-            if (i === rowIdx && j === colIdx) continue
+//         for (var j = colIdx - 1; j <= colIdx + 1; j++) {
+//             if (j < 0 || j > mat[0].length - 1) continue
+//             if (i === rowIdx && j === colIdx) continue
 
-            var cell = mat[i][j]
-            console.log('cell:', cell)
-            if (cell === gFood) foodCount++
-        }
-    }
-    return foodCount
-}
+//             var cell = mat[i][j]
+//             console.log('cell:', cell)
+//             if (cell === gFood) foodCount++
+//         }
+//     }
+//     return foodCount
+// }
 /////////////////////////////////////////////////////////////////////////////////
-function cleanBoard() {
-    var elTds = document.querySelectorAll('.mark, .selected')
-    for (var i = 0; i < elTds.length; i++) {
-        elTds[i].classList.remove('mark', 'selected')
-    }
-}
+// function cleanBoard() {
+//     var elTds = document.querySelectorAll('.mark, .selected')
+//     for (var i = 0; i < elTds.length; i++) {
+//         elTds[i].classList.remove('mark', 'selected')
+//     }
+// }
 /////////////////////////////////////////////////////////////////////////////////
 function printPrimaryDiagonal(squareMat) {
     for (var d = 0; d < squareMat.length; d++) {
@@ -257,10 +257,10 @@ function handleKey(event) {
 }
 /////////////////////////////////////////////////////////////////////////////////
 // Returns the class name for a specific cell
-function getClassName(location) {
-    var cellClass = 'cell-' + location.i + '-' + location.j
-    return cellClass
-}
+// function getClassName(location) {
+//     var cellClass = 'cell-' + location.i + '-' + location.j
+//     return cellClass
+// }
 /////////////////////////////////////////////////////////////////////////////////
 function markCells(coords) {
     console.log('coords:', coords)

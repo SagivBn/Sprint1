@@ -4,8 +4,8 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Minesweeper Project</title>
         <link rel="stylesheet" href="css/main.css" />
+        <title>Minesweeper Project</title>
     </head>
 
     <body onload="initGame()">
@@ -18,27 +18,27 @@
             <img class="health2" src="img/heart.png" alt="heart2" />
             <img class="health3" src="img/heart.png" alt="heart3" />
         </div>
-        <div class="board-container"></div>
-        <table class="minesweeper">
+
+        <table class="board-container">
             <tbody class="mines-board"></tbody>
         </table>
         <h1 class="losing-game">You Lost!</h1>
         <h1 class="winning-game">You Won!</h1>
         <div class="smile">
             <img
-                onclick="init()"
+                onclick="initGame()"
                 class="smile"
                 src="img/smile.png"
                 alt="smile-face"
             />
             <img
-                onclick="init()"
+                onclick="initGame()"
                 class="lost"
                 src="img/lost.png"
                 alt="lost-face"
             />
             <img
-                onclick="init()"
+                onclick="initGame()"
                 class="win"
                 src="img/win.png"
                 alt="win-face"
@@ -46,16 +46,8 @@
         </div>
 
         <div class="timer">0</div>
-        <script type="text/javascript">
-            document.addEventListener('contextmenu', function (Minesweeper) {
-                Minesweeper.preventDefault()
-            })
-        </script>
+
         <script src="js/utils.js"></script>
-        <script src="js/main.js">
-            document.addEventListener("contextmenu",function(Minesweeper){
-              Minesweeper.preventDefault()
-            })
-        </script>
+        <script src="js/main.js"></script>
     </body>
 </html>

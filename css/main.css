@@ -1,6 +1,7 @@
 body {
     background-color: rgb(242, 242, 242);
     text-align: center;
+    font-size: 20px;
 }
 
 table {
@@ -22,18 +23,40 @@ td:hover {
     background-color: wheat;
 }
 img {
-    width: 20px;
+    width: 25px;
 }
-.mines-board {
-    max-height: 100px;
-    max-width: 426.188;
+
+.safe-button-container {
+    margin-top: 20px;
 }
-.pressed {
-    background-color: rgb(198, 182, 182);
+
+.hearts-container {
+    margin-top: 20px;
 }
-.hidden {
-    display: none;
+
+.levels-buttons {
+    margin-top: 20px;
 }
+
+.cell {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.cell-safe-click {
+    background-color: yellow;
+}
+
+.hints-container {
+    margin-top: 20px;
+}
+
+.cell-empty {
+    background-color: black;
+}
+
 .losing-game {
     text-align: center;
     margin: auto;
@@ -57,51 +80,17 @@ img {
 .board-container {
     height: 350px;
     width: 350px;
-    margin: auto;
-    margin-top: 75px;
-    /* box-shadow: 5px 10px #888888; */
+    margin-left: auto;
+    margin-right: auto;
+
+    margin-top: 50px;
     transition: box-shadow, 1s;
     max-width: 420px;
     max-height: 600px;
     min-width: 300px;
 }
-.cell {
-    width: 40px;
-    height: 40px;
-    text-align: center;
-    font-size: 1.5em;
-}
-
-.timer {
-    font-size: 25px;
-    text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
-}
-.health-remain {
-    text-align: center;
-}
-
-.smiling-face {
-    text-align: center;
-    padding: 50px;
-    display: none;
-    width: 150px;
-}
-.lost {
-    text-align: center;
-    padding: 50px;
-    display: none;
-    width: 150px;
-}
-.win {
-    text-align: center;
-    padding: 50px;
-    display: none;
-    width: 150px;
-}
 
 .smile {
-    text-align: center;
     width: 40px;
     height: 40px;
 }

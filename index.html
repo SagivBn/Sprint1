@@ -1,44 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="css/main.css" />
-        <title>Minesweeper Project</title>
-    </head>
 
-    <body onload="initGame()">
-        <h1 title="Good Luck">Minesweeper</h1>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <title>MineSweeper Project</title>
+</head>
 
-        </table>
-        <div class="health-remain">
-            <img class="health1" src="img/heart.png" alt="heart1" />
-            <img class="health2" src="img/heart.png" alt="heart2" />
-            <img class="health3" src="img/heart.png" alt="heart3" />
-        </div>
+<body onload="initGame()">
+    <h1 title="Good Luck">Minesweeper</h1>
+    <div class="hearts-container"></div>
+    <div class="levels-buttons">
+        <button onclick="onLevelClick(gEasyLevel)">Easy</button>
+        <button onclick="onLevelClick(gMediumLevel)">Medium</button>
+        <button onclick="onLevelClick(gHardLevel)">Hard</button>
+    </div>
+    <div class="hints-container"></div>
+    <div class="safe-button-container">
+        <span>safe clicks:</span>
+        <span class="safe-button">
+    </div>
 
+    <button onClick="onSafeClick()">Safe Click</button>
+    <table class="board-container"></table>
+    <div class="smile-container"><img class="smile" onclick="resetGame()" src="/img/smile.png" /></div>
+    <div class="timer">0</div>
+    <div class="best-time-score-container">
+        <span>best time score:</span>
+        <span class="best-time-score">0
+    </div>
+    <h1 class="losing-game">You Lost!</h1>
+    <h1 class="winning-game">You Won!</h1>
+    <script src="/js/main.js"></script>
+</body>
 
-        <div class="levels-buttons">
-            <button onclick="onLevelClick(gFirstLevel)">Easy</button>
-            <button onclick="onLevelClick(gMediumLevel)">Medium</button>
-            <button onclick="onLevelClick(gHardLevel)">Hard</button>
-        </div>
-
-        <table class="board-container">
-            <tbody class="mines-board"></tbody>
-        </table>
-            <img
-                onclick="initGame()"
-                class="smile"
-                src="img/smile.png"
-                alt="smile-face"
-            />
-        <div class="timer">0</div>
-        <h1 class="losing-game">You Lost!</h1>
-        <h1 class="winning-game">You Won!</h1>
-
-        <script src="js/utils.js"></script>
-        <script src="js/main.js"></script>
-    </body>
 </html>

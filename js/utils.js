@@ -14,14 +14,14 @@
 // }
 /////////////////////////////////////////////////////////////////////////////////
 function copyMat(mat) {
-    var newMat = []
+    var newMat = [];
     for (var i = 0; i < mat.length; i++) {
-        newMat[i] = []
+        newMat[i] = [];
         for (var j = 0; j < mat[0].length; j++) {
-            newMat[i][j] = mat[i][j]
+            newMat[i][j] = mat[i][j];
         }
     }
-    return newMat
+    return newMat;
 }
 /////////////////////////////////////////////////////////////////////////////////
 // location such as: {i: 2, j: 7}
@@ -33,24 +33,24 @@ function copyMat(mat) {
 // }
 /////////////////////////////////////////////////////////////////////////////////
 function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min) + min)
+    return Math.floor(Math.random() * (max - min) + min);
 }
 /////////////////////////////////////////////////////////////////////////////////
 function getRandomColor() {
-    var letters = '0123456789ABCDEF'
-    var color = '#'
+    var letters = '0123456789ABCDEF';
+    var color = '#';
     for (var i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)]
+        color += letters[Math.floor(Math.random() * 16)];
     }
-    return color
+    return color;
 }
 function showModal() {
-    var elModal = document.querySelector('.modal')
-    elModal.style.display = 'block'
+    var elModal = document.querySelector('.modal');
+    elModal.style.display = 'block';
 }
 function closeModal() {
-    var elModal = document.querySelector('.modal')
-    elModal.style.display = 'none'
+    var elModal = document.querySelector('.modal');
+    elModal.style.display = 'none';
 }
 /////////////////////////////////////////////////////////////////////////////////
 // function renderBoard() {
@@ -92,12 +92,12 @@ function closeModal() {
 function toggleGame(elBtn) {
     // console.log('gGameInterval:', gGameInterval)
     if (gGameInterval) {
-        clearInterval(gGameInterval)
-        gGameInterval = null
-        elBtn.innerText = 'Start'
+        clearInterval(gGameInterval);
+        gGameInterval = null;
+        elBtn.innerText = 'Start';
     } else {
-        gGameInterval = setInterval(play, GAME_FREQ)
-        elBtn.innerText = 'Stop'
+        gGameInterval = setInterval(play, GAME_FREQ);
+        elBtn.innerText = 'Stop';
     }
 }
 /////////////////////////////////////////////////////////////////////////////////
@@ -137,62 +137,62 @@ function toggleGame(elBtn) {
 //     return gMinesAroundCount
 // }
 function setMinesNegsCount(mat, rowIdx, colIdx) {
-    var minesAroundCount = 0
+    var minesAroundCount = 0;
     for (var i = rowIdx - 1; i <= rowIdx + 1; i++) {
-        if (i < 0 || i > mat.length - 1) continue
+        if (i < 0 || i > mat.length - 1) continue;
 
         for (var j = colIdx - 1; j <= colIdx + 1; j++) {
-            if (j < 0 || j > mat[0].length - 1) continue
-            if (i === rowIdx && j === colIdx) continue
+            if (j < 0 || j > mat[0].length - 1) continue;
+            if (i === rowIdx && j === colIdx) continue;
 
-            var cell = mat[i][j]
-            console.log('cell:', cell)
-            if (cell.isMine) minesAroundCount++
+            var cell = mat[i][j];
+            console.log('cell:', cell);
+            if (cell.isMine) minesAroundCount++;
         }
     }
-    return minesAroundCount
+    return minesAroundCount;
 }
 /////////////////////////////////////////////////////////////////////////////////
 function blowUpNegs(cellI, cellJ) {
     for (var i = cellI - 1; i <= cellI + 1; i++) {
-        if (i < 0 || i >= gBoard.length) continue
+        if (i < 0 || i >= gBoard.length) continue;
         for (var j = cellJ - 1; j <= cellJ + 1; j++) {
-            if (i === cellI && j === cellJ) continue
-            if (j < 0 || j >= gBoard[i].length) continue
+            if (i === cellI && j === cellJ) continue;
+            if (j < 0 || j >= gBoard[i].length) continue;
             if (gBoard[i][j] === LIFE) {
                 // Model
-                gBoard[i][j] = ''
+                gBoard[i][j] = '';
 
                 // DOM
-                var elCell = renderCell(i, j, '')
-                elCell.classList.remove('occupied')
+                var elCell = renderCell(i, j, '');
+                elCell.classList.remove('occupied');
             }
         }
     }
 }
 /////////////////////////////////////////////////////////////////////////////////
 function shuffle(items) {
-    var randIdx, keep
+    var randIdx, keep;
     for (var i = items.length - 1; i > 0; i--) {
-        randIdx = getRandomInt(0, items.length)
-        keep = items[i]
-        items[i] = items[randIdx]
-        items[randIdx] = keep
+        randIdx = getRandomInt(0, items.length);
+        keep = items[i];
+        items[i] = items[randIdx];
+        items[randIdx] = keep;
     }
-    return items
+    return items;
 }
 /////////////////////////////////////////////////////////////////////////////////
 function findEmptyPos() {
     for (var i = 0; i < gBoard.length; i++) {
         for (var j = 0; j < gBoard.length; j++) {
-            var cell = gBoard[i][j]
+            var cell = gBoard[i][j];
             if (!cell) {
-                return { i, j }
+                return {i, j};
             }
         }
     }
 
-    return null
+    return null;
 }
 /////////////////////////////////////////////////////////////////////////////////
 // function countNegsAround(mat, rowIdx, colIdx) {
@@ -221,38 +221,38 @@ function findEmptyPos() {
 /////////////////////////////////////////////////////////////////////////////////
 function printPrimaryDiagonal(squareMat) {
     for (var d = 0; d < squareMat.length; d++) {
-        var item = squareMat[d][d]
-        console.log(item)
+        var item = squareMat[d][d];
+        console.log(item);
     }
 }
 /////////////////////////////////////////////////////////////////////////////////
 // printSecondaryDiagonal(mat)
 function printSecondaryDiagonal(squareMat) {
     for (var d = 0; d < squareMat.length; d++) {
-        var item = squareMat[d][squareMat.length - 1 - d]
-        console.log(item)
+        var item = squareMat[d][squareMat.length - 1 - d];
+        console.log(item);
     }
 }
 /////////////////////////////////////////////////////////////////////////////////
 // Move the player by keyboard arrows
 function handleKey(event) {
-    var i = gGamerPos.i
-    var j = gGamerPos.j
+    var i = gGamerPos.i;
+    var j = gGamerPos.j;
 
-    console.log('event.key:', event.key)
+    console.log('event.key:', event.key);
     switch (event.key) {
         case 'ArrowLeft':
-            moveTo(i, j - 1)
-            break
+            moveTo(i, j - 1);
+            break;
         case 'ArrowRight':
-            moveTo(i, j + 1)
-            break
+            moveTo(i, j + 1);
+            break;
         case 'ArrowUp':
-            moveTo(i - 1, j)
-            break
+            moveTo(i - 1, j);
+            break;
         case 'ArrowDown':
-            moveTo(i + 1, j)
-            break
+            moveTo(i + 1, j);
+            break;
     }
 }
 /////////////////////////////////////////////////////////////////////////////////
@@ -263,67 +263,67 @@ function handleKey(event) {
 // }
 /////////////////////////////////////////////////////////////////////////////////
 function markCells(coords) {
-    console.log('coords:', coords)
+    console.log('coords:', coords);
 
     // DONE: query select them one by one and add mark
     for (var i = 0; i < coords.length; i++) {
-        var coord = coords[i]
-        var selector = getSelector(coord)
-        var elCell = document.querySelector(selector)
-        elCell.classList.add('mark')
+        var coord = coords[i];
+        var selector = getSelector(coord);
+        var elCell = document.querySelector(selector);
+        elCell.classList.add('mark');
     }
 }
 /////////////////////////////////////////////////////////////////////////////////
 // Gets a string such as:  'cell-2-7' and returns {i:2, j:7}
 function getCellCoord(strCellId) {
-    var coord = {}
-    var parts = strCellId.split('-')
-    coord.i = +parts[1]
-    coord.j = +parts[2]
-    return coord
+    var coord = {};
+    var parts = strCellId.split('-');
+    coord.i = +parts[1];
+    coord.j = +parts[2];
+    return coord;
 }
 /////////////////////////////////////////////////////////////////////////////////
 function drawNum(nums) {
     // console.log(`gNums.length:`, gNums.length)
-    var num = getRandomInt(0, nums.length)
-    var removedNum = nums.splice(num, 1)
+    var num = getRandomInt(0, nums.length);
+    var removedNum = nums.splice(num, 1);
     // console.log(`gNums:`, gNums)
-    return removedNum
+    return removedNum;
 }
 /////////////////////////////////////////////////////////////////////////////////
 function handleKey(event) {
-    var i = gGamerPos.i
-    var j = gGamerPos.j
+    var i = gGamerPos.i;
+    var j = gGamerPos.j;
 
     switch (event.key) {
         case 'ArrowLeft':
-            if (j <= 0) moveTo(i, gBoard[i].length - 1)
-            else moveTo(i, j - 1)
-            break
+            if (j <= 0) moveTo(i, gBoard[i].length - 1);
+            else moveTo(i, j - 1);
+            break;
         case 'ArrowRight':
-            if (j >= gBoard[i].length - 1) moveTo(i, 0)
-            else moveTo(i, j + 1)
-            break
+            if (j >= gBoard[i].length - 1) moveTo(i, 0);
+            else moveTo(i, j + 1);
+            break;
         case 'ArrowUp':
-            if (i <= 0) moveTo(gBoard.length - 1, j)
-            else moveTo(i - 1, j)
-            break
+            if (i <= 0) moveTo(gBoard.length - 1, j);
+            else moveTo(i - 1, j);
+            break;
         case 'ArrowDown':
-            if (i >= gBoard.length - 1) moveTo(0, j)
-            else moveTo(i + 1, j)
-            break
+            if (i >= gBoard.length - 1) moveTo(0, j);
+            else moveTo(i + 1, j);
+            break;
     }
 }
 ///////////////////////////////////////////////////////////////////////////////
 function playAudio() {
-    var playSound = new Audio('audio/pop.mp3')
-    playSound.volume = 0.1
-    playSound.play()
+    var playSound = new Audio('audio/pop.mp3');
+    playSound.volume = 0.1;
+    playSound.play();
 }
 //AUDIO HTML
 // ;<audio src='audio/pop.mp3' type='audio/mpeg'></audio>
 ///////////////////////////////////////////////////////////////////////////////
 
 function capitalize(str) {
-    return str.charAt(0).toUpperCase() + str.substring(1)
+    return str.charAt(0).toUpperCase() + str.substring(1);
 }
